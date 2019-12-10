@@ -47,7 +47,7 @@ class App extends React.Component<{}, IState> {
   };
 
   public checkIfGameIsOver = (board: Player[]) => {
-    let winCheckSlices = [
+    const winCheckSlices = [
       [board[0], board[1], board[2]],
       [board[3], board[4], board[5]],
       [board[6], board[7], board[8]],
@@ -70,6 +70,36 @@ class App extends React.Component<{}, IState> {
     }
 
     return -1;
+  };
+
+  public createOnClickHandler = (index: number) => () => {
+    const { board, nextPlayerTurn, gameIsWon } = this.state;
+
+    if (gameIsWon !== ONGOING_GAME || board[index] !== Player.None) {
+      return;
+    }
+
+    const newBoard = board.slice();
+    newBoard[index] = nextPlayerTurn;
+    const newGameIsWon = this.checkIfGameIsOver(newBoard);
+
+    this.setState({
+      board: newBoard,
+      nextPlayerTurn: 3 - nextPlayerTurn,
+      gameIsWon: newGameIsWon
+    });
+  };
+
+  public renderCell = (index: number) => {
+    const { board } = this.state;
+
+    return (
+      <div
+        className="cell"
+        onClick={this.createOnClickHandler(index)}
+        data-player={board[index]}
+      />
+    );
   };
 
   public render() {
