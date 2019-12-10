@@ -58,6 +58,7 @@ class App extends React.Component<{}, IState> {
       [board[2], board[4], board[6]]
     ];
 
+    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < winCheckSlices.length; i++) {
       const winResult = this.sliceWinCheck(winCheckSlices[i]);
       if (winResult !== -1) {
@@ -85,8 +86,8 @@ class App extends React.Component<{}, IState> {
 
     this.setState({
       board: newBoard,
-      nextPlayerTurn: 3 - nextPlayerTurn,
-      gameIsWon: newGameIsWon
+      gameIsWon: newGameIsWon,
+      nextPlayerTurn: 3 - nextPlayerTurn
     });
   };
 
