@@ -35,6 +35,17 @@ class App extends React.Component<{}, IState> {
     nextPlayerTurn: Player.One
   };
 
+  public sliceWinCheck = (slice: Player[]) => {
+    if (
+      slice[0] === slice[1] &&
+      slice[1] === slice[2] &&
+      slice[2] !== Player.None
+    ) {
+      return slice[0];
+    }
+    return -1;
+  };
+
   public render() {
     return (
       <div className="App">
