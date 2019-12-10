@@ -112,6 +112,22 @@ class App extends React.Component<{}, IState> {
     );
   };
 
+  public renderStatus = () => {
+    const { gameIsWon } = this.state;
+
+    const winningText =
+      gameIsWon !== Player.None
+        ? `Player ${gameIsWon} won`
+        : `the game is a draw`;
+    return (
+      <div style={{ marginTop: "75px" }}>
+        {"Player 1 is green"} <br />
+        {"Player 2 is red"} <br />
+        {gameIsWon === ONGOING_GAME ? "game is ongoing" : winningText}
+      </div>
+    );
+  };
+
   public render() {
     return (
       <div className="App">
@@ -119,6 +135,8 @@ class App extends React.Component<{}, IState> {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Tic Tac Toe with React and Typescript</h1>
         </header>
+        {this.renderBoard()}
+        {this.renderStatus()}
       </div>
     );
   }
