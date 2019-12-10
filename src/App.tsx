@@ -102,6 +102,16 @@ class App extends React.Component<{}, IState> {
     );
   };
 
+  public renderBoard = () => {
+    const { board } = this.state;
+
+    return (
+      <div className="board-container">
+        {board.map((value, key) => this.renderCell(key))}
+      </div>
+    );
+  };
+
   public render() {
     return (
       <div className="App">
